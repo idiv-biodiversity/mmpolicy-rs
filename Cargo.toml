@@ -1,0 +1,35 @@
+[package]
+name = "mmpolicy"
+version = "0.1.0"
+authors = ["Christian Krause <christian.krause@mailbox.org>"]
+description = "library for IBM Storage Scale policies"
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+documentation = "https://docs.rs/mmpolicy"
+homepage = "https://github.com/idiv-biodiversity/mmpolicy-rs"
+repository = "https://github.com/idiv-biodiversity/mmpolicy-rs"
+keywords = ["gpfs", "spectrum-scale", "storage-scale"]
+categories = ["filesystem"]
+edition = "2021"
+rust-version = "1.74"
+
+[features]
+clap = ["dep:clap"]
+log = ["dep:log"]
+
+[dependencies]
+libc = "0.2"
+thiserror = "1"
+
+[dependencies.clap]
+version = "4"
+default-features = false
+features = ["std"]
+optional = true
+
+[dependencies.log]
+version = "0.4"
+optional = true
+
+[dev-dependencies]
+indoc = "2"
