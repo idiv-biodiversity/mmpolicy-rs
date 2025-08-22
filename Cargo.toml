@@ -14,6 +14,7 @@ edition = "2024"
 rust-version = "1.85"
 
 [features]
+default = ["clap", "log"]
 clap = ["dep:clap"]
 log = ["dep:log"]
 
