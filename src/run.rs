@@ -1,4 +1,5 @@
 use std::ffi::{OsStr, OsString};
+use std::fmt::Write as _;
 use std::fs::File;
 use std::path::{Path, PathBuf};
 use std::process::{Command, Stdio};
@@ -174,10 +175,10 @@ impl Policy {
             Ok(reports)
         } else {
             let mut message = String::new();
-            message.push_str("`mmapplypolicy` failed");
+            let _ = write!(message, "`mmapplypolicy` failed");
 
             if let Some(rc) = mmapplypolicy.code() {
-                message.push_str(&format!(" with exit status {rc}"));
+                let _ = write!(message, " with exit status {rc}");
             }
 
             Err(Error::ApplyPolicyFailed(message))
