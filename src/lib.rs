@@ -87,7 +87,7 @@
 #[cfg(feature = "clap")]
 pub mod clap;
 mod run;
-mod types;
+pub mod types;
 mod write;
 
 /// The important stuff.
