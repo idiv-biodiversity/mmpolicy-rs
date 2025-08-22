@@ -1,3 +1,5 @@
+//! Type definitions.
+
 use libc::{gid_t, uid_t};
 
 /// Policy with rules.
