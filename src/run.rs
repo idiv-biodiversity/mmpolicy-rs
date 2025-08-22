@@ -70,7 +70,7 @@ impl Policy {
         file_list_prefix: Option<&Path>,
         options: &Options,
     ) -> Result<Vec<PathBuf>> {
-        if file_list_prefix.map_or(false, |prefix| {
+        if file_list_prefix.is_some_and(|prefix| {
             !prefix.is_dir() && prefix.file_name().is_none()
         }) {
             return Err(Error::InvalidFileListPrefix(String::from(
