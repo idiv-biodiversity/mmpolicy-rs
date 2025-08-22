@@ -178,7 +178,7 @@ impl Policy {
 
             if let Some(rc) = mmapplypolicy.code() {
                 message.push_str(&format!(" with exit status {rc}"));
-            };
+            }
 
             Err(Error::ApplyPolicyFailed(message))
         }
