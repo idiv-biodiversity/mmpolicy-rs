@@ -10,8 +10,8 @@ homepage = "https://github.com/idiv-biodiversity/mmpolicy-rs"
 repository = "https://github.com/idiv-biodiversity/mmpolicy-rs"
 keywords = ["gpfs", "spectrum-scale", "storage-scale"]
 categories = ["filesystem"]
-edition = "2021"
-rust-version = "1.74"
+edition = "2024"
+rust-version = "1.85"
 
 [features]
 clap = ["dep:clap"]

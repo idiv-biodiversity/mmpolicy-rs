@@ -74,8 +74,8 @@ impl Policy {
             !prefix.is_dir() && prefix.file_name().is_none()
         }) {
             return Err(Error::InvalidFileListPrefix(String::from(
-"prefix needs to be either an existing directory or have a file name \
- component in its path"
+                "prefix needs to be either an existing directory or have a \
+                 file name component in its path",
             )));
         }
 
