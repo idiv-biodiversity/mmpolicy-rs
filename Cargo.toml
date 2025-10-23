@@ -19,7 +19,7 @@ log = ["dep:log"]
 
 [dependencies]
 libc = "0.2"
-thiserror = "1"
+thiserror = "2"
 
 [dependencies.clap]
 version = "4"
