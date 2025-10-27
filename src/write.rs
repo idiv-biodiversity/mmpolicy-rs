@@ -1,6 +1,8 @@
 use std::io::{self, Write};
 
-use crate::types::{Exec, Name, Policy, Rule, RuleType, Show, Where};
+use crate::types::{
+    Age, Definition, Exec, Name, Policy, Rule, RuleType, Show, Where,
+};
 
 impl Policy {
     /// Write the policy to `output`.
@@ -9,11 +11,19 @@ impl Policy {
     ///
     /// Errors may only occur when writing to `output`.
     pub fn write(&self, output: &mut impl Write) -> io::Result<()> {
-        let mut first = true;
+        for define in &self.defines {
+            define.write(output)?;
+        }
+
+        if !self.defines.is_empty() {
+            writeln!(output)?;
+        }
+
+        let mut first_rule = true;
 
         for rule in &self.rules {
-            if first {
-                first = false;
+            if first_rule {
+                first_rule = false;
             } else {
                 writeln!(output)?;
             }
@@ -22,6 +32,12 @@ impl Policy {
         }
 
         Ok(())
+    }
+}
+
+impl Definition {
+    fn write(&self, output: &mut impl Write) -> io::Result<()> {
+        writeln!(output, "define({}, {})", self.name, self.value)
     }
 }
 
@@ -63,17 +79,38 @@ impl RuleType {
                 }
 
                 if let Some(filter) = filter {
-                    let s = match filter {
-                        Where::Group(group) => format!("GROUP_ID = {group}"),
-                        Where::User(user) => format!("USER_ID = {user}"),
-                    };
-
-                    writeln!(output, "  WHERE {s}")?;
+                    filter.write(output)?;
                 }
             }
         }
 
         Ok(())
+    }
+}
+
+impl Where {
+    fn write(&self, output: &mut impl Write) -> io::Result<()> {
+        let s = match self {
+            Self::Access(x, Age::Days(age)) => {
+                format!(
+                    "DAYS(CURRENT_TIMESTAMP) - DAYS(ACCESS_TIME) {x} {age}"
+                )
+            }
+
+            Self::Group(group) => format!("GROUP_ID = {group}"),
+
+            Self::Modification(x, Age::Days(age)) => {
+                format!(
+                    "DAYS(CURRENT_TIMESTAMP) - DAYS(MODIFICATION_TIME) {x} {age}"
+                )
+            }
+
+            Self::User(user) => format!("USER_ID = {user}"),
+
+            Self::Free(s) => s.to_owned(),
+        };
+
+        writeln!(output, "  WHERE {s}")
     }
 }
 

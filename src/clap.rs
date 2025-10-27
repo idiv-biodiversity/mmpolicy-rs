@@ -42,12 +42,23 @@ use clap::{Arg, ArgMatches};
 
 use crate::run::Options;
 
-const ARG_ACTION: &str = "mm-action";
-const ARG_CHOICE_ALGORITHM: &str = "mm-choice-algorithm";
-const ARG_GLOBAL_WORK_DIR: &str = "mm-global-work-dir";
-const ARG_INFORMATION_LEVEL: &str = "mm-information-level";
-const ARG_LOCAL_WORK_DIR: &str = "mm-local-work-dir";
-const ARG_NODES: &str = "mm-nodes";
+/// Name of the action argument.
+pub const ARG_ACTION: &str = "mm-action";
+
+/// Name of the choice algorithm argument.
+pub const ARG_CHOICE_ALGORITHM: &str = "mm-choice-algorithm";
+
+/// Name of the global working directory argument.
+pub const ARG_GLOBAL_WORK_DIR: &str = "mm-global-work-dir";
+
+/// Name of the information level argument.
+pub const ARG_INFORMATION_LEVEL: &str = "mm-information-level";
+
+/// Name of the local working directory argument.
+pub const ARG_LOCAL_WORK_DIR: &str = "mm-local-work-dir";
+
+/// Name of the nodes argument.
+pub const ARG_NODES: &str = "mm-nodes";
 
 const HELP_HEADING: &str = "Forwarded to `mmapplypolicy`";
 
